@@ -10,22 +10,11 @@ function climbingLeaderboard(ranked, player) {
     const res = new Array(player.length);
     ranked = Array.from(new Set(ranked));
 
-    for (let i = 0; i < player.length; i ++) {
-        while(ranked.length) {
-            if (player[i] < ranked[ranked.length - 1]) {
-                if (!res[i]) res[i] = ranked.length + 1;
-                break;
-            } else if (player[i] == ranked[ranked.length - 1]) {
-                if (!res[i]) res[i] = ranked.length;
-                else res[i] --;
-                break;
-            } else {
-                if (!res[i]) res[i] = ranked.length
-                else res[i]--;
-                ranked.pop();
-            }
+    for (let i = 0; i < player.length; i++) {
+        while (player[i] >= ranked[ranked.length - 1]) {
+            ranked.pop();
         }
-        if (!ranked.length) res[i] = 1;
+        res[i] = ranked.length + 1;
     }
     return res;
 }
